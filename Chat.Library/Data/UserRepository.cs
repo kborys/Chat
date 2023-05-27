@@ -20,11 +20,11 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> CheckExistence(string email)
     {
-        const string sql = "SELECT EXISTS(SELECT * FROM [User] WHERE Email = @Email;";
+        const string sql = "SELECT CASE WHEN EXISTS (SELECT * FROM [User] WHERE Email = @Email) THEN 1 ELSE 0 END;";
 
         using var connection = Connection;
 
-        return await connection.ExecuteScalarAsync<bool>(sql);
+        return await connection.ExecuteScalarAsync<bool>(sql, new { Email = email });
     }
 
     public async Task<int> Create(User user)

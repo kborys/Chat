@@ -10,9 +10,9 @@ public class AuthRequest
     [Required]
     public string Password { get; set; }
 
-    public AuthRequest(string userName, string password)
+    public AuthRequest(string email, string password)
     {
-        Email = userName;
+        Email = email;
         Password = password;
     }
 }

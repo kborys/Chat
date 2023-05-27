@@ -47,7 +47,7 @@ app.MapPost("/register", [AllowAnonymous] async ([FromBody] CreateUserRequest re
     if (await userRepository.CheckExistence(request.Email))
         return Results.Conflict("User with given email already exists.");
 
-    var newUser = new User(request.Email, request.FirstName, request.LastName, request.Password);
+    var newUser = new User(request.Email, request.FirstName, request.LastName, SecretHasher.Hash(request.Password));
     newUser.UserId = await userRepository.Create(newUser);
 
     return newUser.UserId == 0 ? Results.Problem($"Rejestracja u¿ytkownika { newUser.Email } nie powiod³a siê.") : Results.Ok(newUser);

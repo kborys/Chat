@@ -1,11 +1,18 @@
-﻿using Chat.Commons.Contracts;
-using Chat.Commons.Models;
+﻿using Chat.Commons.Models;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Chat.Library.Data;
+
+public interface IUserRepository
+{
+    Task<User?> GetById(int id);
+    Task<User?> GetByEmail(string email);
+    Task<bool> CheckExistence(string email);
+    Task<int> Create(User user);
+}
 
 public class UserRepository : IUserRepository
 {

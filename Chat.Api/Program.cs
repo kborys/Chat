@@ -1,6 +1,6 @@
-using Chat.Commons.Contracts;
 using Chat.Commons.Models;
 using Chat.Library;
+using Chat.Library.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;

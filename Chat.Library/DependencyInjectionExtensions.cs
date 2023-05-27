@@ -1,5 +1,4 @@
-﻿using Chat.Commons.Contracts;
-using Chat.Library.Data;
+﻿using Chat.Library.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chat.Library;

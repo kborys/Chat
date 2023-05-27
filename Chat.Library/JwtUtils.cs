@@ -1,5 +1,4 @@
-﻿using Chat.Commons.Contracts;
-using Chat.Commons.Models;
+﻿using Chat.Commons.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,6 +6,11 @@ using System.Security.Claims;
 using System.Text;
 
 namespace Chat.Library;
+
+public interface IJwtUtils
+{
+    string GenerateToken(User user);
+}
 
 public class JwtUtils : IJwtUtils
 {

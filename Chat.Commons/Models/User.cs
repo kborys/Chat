@@ -4,7 +4,7 @@ namespace Chat.Commons.Models;
 public class User
 {
     public int UserId { get; set; }
-    public string EmailAddress { get; set; }
+    public string Email { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
 
@@ -16,12 +16,12 @@ public class User
 
     }
 
-    public User(int userId, string emailAddress, string firstName, string lastName, string password)
+    public User(string email, string firstName, string lastName, string password, int userId = 0)
     {
-        UserId = userId;
-        EmailAddress = emailAddress;
+        Email = email;
         FirstName = firstName;
         LastName = lastName;
         Password = password;
+        UserId = userId;
     }
 }

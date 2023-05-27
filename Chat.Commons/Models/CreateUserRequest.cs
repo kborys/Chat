@@ -5,9 +5,8 @@ namespace Chat.Commons.Models;
 public class CreateUserRequest
 {
     [Required]
-    [MinLength(6)]
-    [MaxLength(32)]
-    public string UserName { get; set; }
+    [EmailAddress]
+    public string Email { get; set; }
     [Required]
     [MinLength(2)]
     [MaxLength(50)]
@@ -19,15 +18,11 @@ public class CreateUserRequest
     [Required]
     [MinLength(8)]
     public string Password { get; set; }
-    [Required]
-    [EmailAddress]
-    public string EmailAddress { get; set; }
-    public CreateUserRequest(string userName, string firstName, string lastName, string password, string emailAddress)
+    public CreateUserRequest(string email, string firstName, string lastName, string password)
     {
-        UserName = userName;
+        Email = email;
         FirstName = firstName;
         LastName = lastName;
         Password = password;
-        EmailAddress = emailAddress;
     }
 }

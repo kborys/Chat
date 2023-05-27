@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Api", "Chat.Api\Chat.Api.csproj", "{7431BDD0-D3D0-4134-9F31-7816612DD6B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Api", "Chat.Api\Chat.Api.csproj", "{7431BDD0-D3D0-4134-9F31-7816612DD6B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Library", "Chat.Library\Chat.Library.csproj", "{ACA2F5EB-9C6F-4076-BA54-723B4F398BAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Library", "Chat.Library\Chat.Library.csproj", "{ACA2F5EB-9C6F-4076-BA54-723B4F398BAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.UI.Console", "Chat.UI.Console\Chat.UI.Console.csproj", "{1C714F05-FB7D-4880-8BAF-726E53F9A76B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.UI.Console", "Chat.UI.Console\Chat.UI.Console.csproj", "{1C714F05-FB7D-4880-8BAF-726E53F9A76B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Commons", "Chat.Commons\Chat.Commons.csproj", "{4B787E97-DB66-4FAC-83A2-CD0AF93F5BCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Commons", "Chat.Commons\Chat.Commons.csproj", "{4B787E97-DB66-4FAC-83A2-CD0AF93F5BCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.UI.Avalonia", "Chat.UI.Avalonia\Chat.UI.Avalonia.csproj", "{BE9D890F-80A4-44A8-AF11-D88A38ED4E46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.UI.Avalonia", "Chat.UI.Avalonia\Chat.UI.Avalonia.csproj", "{BE9D890F-80A4-44A8-AF11-D88A38ED4E46}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Chat.SqlDb", "Chat.SqlDb\Chat.SqlDb.sqlproj", "{A1249DA0-CF63-417B-ABCF-ACFC08EEF2A9}"
 EndProject

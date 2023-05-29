@@ -4,7 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b8496f8f-c231-4ede-95ce-69bd6a6cb548</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="7.0.5" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Chat.Library\Chat.Library.csproj" />

@@ -26,6 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Chat.Commons\Chat.Commons.csproj" />
+    <ProjectReference Include="..\Chat.UI.Library\Chat.UI.Library.csproj" />
   </ItemGroup>
 </Project>

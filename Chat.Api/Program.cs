@@ -1,8 +1,10 @@
+using Chat.Api;
 using Chat.Commons.Models;
 using Chat.Library;
 using Chat.Library.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -32,8 +34,8 @@ builder.Services.AddAuthentication()
     });
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddData();
-builder.Services.AddCore();
+builder.Services.AddLibrary();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 

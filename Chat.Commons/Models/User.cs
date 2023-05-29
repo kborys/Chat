@@ -9,7 +9,7 @@ public class User
     public string LastName { get; set; }
 
     [JsonIgnore]
-    public string Password { get; set; }
+    public string? Password { get; set; }
 
     private User() //dapper purpose
     {

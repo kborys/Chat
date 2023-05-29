@@ -36,6 +36,7 @@ builder.Services.AddAuthentication()
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddLibrary();
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
 
 var app = builder.Build();
 
@@ -75,5 +76,7 @@ app.MapGet("/test", () =>
 {
     return "you are authorized";
 });
+
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();

@@ -10,6 +10,8 @@ namespace Chat.UI.Avalonia
         public IViewFor ResolveView<T>(T viewModel, string? contract) => viewModel switch
         {
             LoginViewModel context => new LoginView { DataContext = context },
+            RegisterViewModel context => new RegisterView { DataContext = context},
+            ChatViewModel context => new ChatView { DataContext = context },
             _ => throw new ArgumentOutOfRangeException(nameof(viewModel))
         };
     }

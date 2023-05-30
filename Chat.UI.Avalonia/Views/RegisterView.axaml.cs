@@ -1,13 +1,12 @@
 using Avalonia.ReactiveUI;
 using Chat.UI.Avalonia.ViewModels;
 using ReactiveUI;
-using System.Reactive;
 
 namespace Chat.UI.Avalonia.Views;
 
-public partial class LoginView : ReactiveUserControl<LoginViewModel>
+public partial class RegisterView : ReactiveUserControl<RegisterViewModel>
 {
-    public LoginView()
+    public RegisterView()
     {
         this.WhenActivated(disposables => { });
         InitializeComponent();

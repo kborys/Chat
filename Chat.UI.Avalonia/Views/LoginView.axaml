@@ -1,9 +1,36 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Chat.UI.Avalonia.Views.LoginView">
-	<StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-		<TextBlock Text="Hi, I'm the login view!" />
-		<TextBlock Text="{Binding UrlPathSegment}" />
-	</StackPanel>
+	
+
+
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="auto" MinWidth="250" MaxWidth="500"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Grid.Column="1" Grid.Row="0" Text="Email" FontSize="14"/>
+		<TextBox Grid.Column="1" Grid.Row="1" x:Name="EmailTextBox" Watermark="Enter your email"/>
+
+		<TextBlock Grid.Column="1" Grid.Row="2" Text="Password" FontSize="14" Margin="0,0,0,5"/>
+		<TextBox Grid.Column="1" Grid.Row="3" x:Name="PasswordBox" Watermark="Enter your password" PasswordChar="*"/>
+
+		<Button Grid.Column="1" Grid.Row="4" Content="Login" HorizontalAlignment="Center" Width="100" Command="{Binding ToChat}"/>
+		<Button Grid.Column="1" Grid.Row="5" Content="Register" HorizontalAlignment="Center" Width="100" Command="{Binding ToRegistration}"/>
+
+	</Grid>
 </UserControl>

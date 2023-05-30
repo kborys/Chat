@@ -3,10 +3,6 @@
              xmlns:local="using:Chat.UI.Avalonia"
              x:Class="Chat.UI.Avalonia.App">
 
-    <Application.DataTemplates>
-        <local:ViewLocator/>
-    </Application.DataTemplates>
-
     <Application.Styles>
         <FluentTheme Mode="Light"/>
     </Application.Styles>

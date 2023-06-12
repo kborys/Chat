@@ -1,9 +1,32 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Chat.UI.Avalonia.Views.RegisterView">
-	<Grid Background="BlanchedAlmond">
-		<TextBlock Text="Hi, I'm the register view!" />
+	<UserControl.Styles>
+		<Styles>
+		</Styles>
+	</UserControl.Styles>
+	
+	<Grid RowDefinitions="*, auto, *" ColumnDefinitions="*, auto, *">
+		<StackPanel Grid.Column="1" Grid.Row="1" Width="200">
+			<TextBlock Text="First name" Margin="0,0,0,5"/>
+			<TextBox Text="{Binding FirstName}" Watermark="Enter your first name" Margin="0 0 0 10"/>
 
-		<Button Content="Register" Command="{Binding BackToLogin}" />
+			<TextBlock Text="Last name" Margin="0,0,0,5"/>
+			<TextBox Text="{Binding LastName}" Watermark="Enter your last name" Margin="0 0 0 10"/>
+			
+			<TextBlock Text="Email" Margin="0,0,0,5"/>
+			<TextBox Text="{Binding Email}" Watermark="Enter your email" Margin="0 0 0 10"/>
+
+			<TextBlock Text="Password" Margin="0,0,0,5"/>
+			<TextBox Text="{Binding Password}" Watermark="Enter your password" PasswordChar="*" Margin="0,0,0,20"/>
+
+			<TextBlock Text="Registration complete!" IsVisible="{Binding IsRegistrationComplete, Mode=OneWay}" Margin="0,0,0,20" FontWeight="Bold" TextAlignment="Center" Foreground="Green"/>
+
+			<TextBlock Text="Registration failed!" IsVisible="{Binding HasRegistrationFailed, Mode=OneWay}" Margin="0,0,0,20" FontWeight="Bold" TextAlignment="Center" Foreground="Red"/>
+			
+			<Button Command="{Binding OnRegister}" Background="Green" Foreground="WhiteSmoke" FontSize="15" IsDefault="true" Content="Register" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,0,15" IsEnabled="{Binding !IsRegistering, Mode=OneWay}"/>
+
+			<Button Command="{Binding BackToLogin}" Background="White" Foreground="Black" BorderBrush="Black" BorderThickness="1" FontSize="15" IsDefault="true" Content="Back to login page" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="{Binding !IsRegistering, Mode=OneWay}"/>
+		</StackPanel>
 	</Grid>
 </UserControl>

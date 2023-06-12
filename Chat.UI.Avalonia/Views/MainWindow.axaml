@@ -17,4 +17,5 @@
 			</rxui:RoutedViewHost.ViewLocator>
 		</rxui:RoutedViewHost>
 	</Grid>
+	
 </Window>

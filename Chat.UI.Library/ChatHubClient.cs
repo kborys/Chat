@@ -1,4 +1,4 @@
-﻿
+﻿using Chat.Commons.Models;
 using Microsoft.AspNetCore.SignalR.Client;
 
 public class ChatHubClient
@@ -17,8 +17,23 @@ public class ChatHubClient
         ChatConnection.StartAsync().ConfigureAwait(false).GetAwaiter().GetResult();
     }
 
-    public async Task SendMessage(string message, string receiverEmail)
+    public async Task SendMessage(Message msg)
     {
-        await ChatConnection.InvokeAsync("SendMessage", message, receiverEmail);
+        await ChatConnection.InvokeAsync("SendMessage", msg);
+    }
+
+    public async Task AddFriend(int userId, string friendEmail)
+    {
+        await ChatConnection.InvokeAsync("AddFriend", userId, friendEmail);
+    }
+
+    public async Task GetFriends()
+    {
+        await ChatConnection.InvokeAsync("GetFriends");
+    }
+
+    public async Task GetMessages(int friendId)
+    {
+        await ChatConnection.InvokeAsync("GetMessages", friendId);
     }
 }

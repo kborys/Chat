@@ -4,7 +4,6 @@ using Chat.Library;
 using Chat.Library.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -36,7 +35,7 @@ builder.Services.AddAuthentication()
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddLibrary();
 builder.Services.AddSignalR();
-builder.Services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
+//builder.Services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
 
 var app = builder.Build();
 

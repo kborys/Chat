@@ -22,9 +22,9 @@ public class ChatHubClient
         await ChatConnection.InvokeAsync("SendMessage", msg);
     }
 
-    public async Task AddFriend(int userId, string friendEmail)
+    public async Task AddFriend(string friendEmail)
     {
-        await ChatConnection.InvokeAsync("AddFriend", userId, friendEmail);
+        await ChatConnection.InvokeAsync("AddFriend", friendEmail);
     }
 
     public async Task GetFriends()

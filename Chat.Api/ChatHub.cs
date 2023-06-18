@@ -28,6 +28,9 @@ public class ChatHub : Hub
         var friend = await _userRepo.GetByEmail(friendEmail);
         if (friend == null) return;
 
+        var friends = await _userRepo.GetFriends(userId);
+        if(friends.Any(friend => friend.Email == friendEmail)) return;
+
         await _userRepo.AddFriend(userId, friend.UserId);
         await Clients.User(userId.ToString()).SendAsync("AddFriend", friend);
     }

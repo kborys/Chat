@@ -12,11 +12,9 @@
 	</Design.DataContext>
 
 	<UserControl.Styles>
-		<Style Selector="Border.MyMessage">
+		<Style Selector="Border.ReceiverMessage">
 			<Setter Property="Background" Value="LightBlue"/>
-		</Style>
-		<Style Selector="Border.FriendMessage">
-			<Setter Property="Background" Value="LightGray"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
 		</Style>
 	</UserControl.Styles>
 
@@ -26,45 +24,18 @@
 			<!-- Nagłówek -->
 			<Grid Grid.Row="0" ColumnDefinitions="*, Auto" Margin="0 8">
 				<StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-					<Label FontWeight="Black">Czaty</Label>
+					<Label FontSize="18" FontWeight="Bold">Czaty</Label>
 				</StackPanel>
-				<Rectangle Grid.Column="1" Width="40" Height="40" Fill="Black"></Rectangle>
+				<StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+					<TextBox Text="{Binding FriendInput, Mode=TwoWay}" MaxWidth="130" Margin="8 0" CornerRadius="20" BorderThickness="0" VerticalContentAlignment="Center" Background="#BCC0C4" Height="20"></TextBox>
+
+					<Button Command="{Binding OnAddFriend}">Add</Button>
+				</StackPanel>
 			</Grid>
 
 			<!-- Konwersacje -->
 			<ScrollViewer Grid.Row="1">
 				<!-- Konwersacja -->
-				<!--<StackPanel>
-					<Grid ColumnDefinitions="auto, *" Margin="0,0,0,5">
-						--><!-- Zdjęcie --><!--
-						<Rectangle Grid.Column="0" Fill="Black" Width="50" Height="50"></Rectangle>
-						--><!-- Dane osobowe --><!--
-						<StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
-							<Label FontWeight="Black">Konrad Boryś</Label>
-							<Label>Wiadomość</Label>
-						</StackPanel>
-					</Grid>
-
-					<Grid ColumnDefinitions="auto, *" Margin="0,0,0,5">
-						--><!-- Zdjęcie --><!--
-						<Rectangle Grid.Column="0" Fill="Black" Width="50" Height="50"></Rectangle>
-						--><!-- Dane osobowe --><!--
-						<StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
-							<Label FontWeight="Black">Konrad Boryś</Label>
-							<Label>Wiadomość</Label>
-						</StackPanel>
-					</Grid>
-
-					<Grid ColumnDefinitions="auto, *" Margin="0,0,0,5">
-						--><!-- Zdjęcie --><!--
-						<Rectangle Grid.Column="0" Fill="Black" Width="50" Height="50"></Rectangle>
-						--><!-- Dane osobowe --><!--
-						<StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
-							<Label FontWeight="Black">Konrad Boryś</Label>
-							<Label>Wiadomość</Label>
-						</StackPanel>
-					</Grid>
-				</StackPanel>-->
 				<ListBox Items="{Binding Friends}" SelectedItem="{Binding SelectedFriend}">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
@@ -81,29 +52,38 @@
 			<!-- Nagłówek konwersacji -->
 			<Grid Grid.Row="0" ColumnDefinitions="Auto, *, auto" Margin="8">
 				<StackPanel Grid.Column="0" Orientation="Horizontal">
-					<Rectangle Width="40" Height="40" Fill="Red"></Rectangle>
-					<Label Margin="8 0 0 0">Konrad Boryś</Label>
+					<TextBlock FontSize="18" FontWeight="Bold" Text="{Binding SelectedFriend.FullName}"></TextBlock>
 				</StackPanel>
 			</Grid>
 			<Border Grid.Row="0" BorderThickness="0 0 0 .5 " BorderBrush="Gray"></Border>
 
-			<!-- Konwersacja -->
-			<ListBox Grid.Row="0" Items="{Binding Messages}">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Border Classes.MyMessage="{Binding true}" CornerRadius="4" Padding="4">
-							<TextBlock Text="{Binding Content}"/>
-						</Border>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
-			<!-- <Rectangle Grid.Row="1" Fill="green"></Rectangle> -->
+			<StackPanel Grid.Row="1">
+				<ItemsControl Items="{Binding Messages}" Margin="5">
+					<!--Use a StackPanel to display all the modules-->
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+
+					<!--This defines the layout for each item (i.e. each module)-->
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<!--The controls to display each item; bind them to properties on the HardwareModule class-->
+							<Border Classes="ReceiverMessage" 
+									Classes.ReceiverMessage="{Binding IsSender, RelativeSource={RelativeSource	AncestorType=ItemsControl}}" 
+									Margin="0 0 0 5"  CornerRadius="15" Padding="8">
+								<TextBlock Text="{Binding Content}"/>
+							</Border>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+			
 			<!-- Pasek wiadomości -->
 			<Grid Grid.Row="2" ColumnDefinitions="Auto, *, auto" RowDefinitions="*, auto" Margin="8">
-				<Rectangle Grid.Column="0" Grid.Row="1" Height="35" Width="35" Fill="Red"></Rectangle>
 				<TextBox Text="{Binding MessageInput}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" TextWrapping="Wrap" MaxHeight="80" Margin="8 0" CornerRadius="20" BorderThickness="0" VerticalContentAlignment="Center" Background="#BCC0C4"></TextBox>
-				<Button Grid.Row="0" Grid.Column="0" Command="{Binding OnSendButtonClick}">Send</Button>
-				<Rectangle Grid.Column="2" Grid.Row="1" Height="35" Width="35" Fill="Red"></Rectangle>
+				<Button Grid.Row="0" Grid.Column="2" Command="{Binding OnSendMessage}">Send</Button>
 			</Grid>
 		</Grid>
 	</Grid>

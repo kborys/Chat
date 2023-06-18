@@ -1,4 +1,5 @@
 ﻿using Avalonia.Collections;
+using Avalonia.Media.Imaging;
 using Chat.Commons.Models;
 using DynamicData;
 using DynamicData.Kernel;
@@ -34,7 +35,13 @@ public class ChatViewModel : ReactiveObject, IRoutableViewModel
         set
         {
             this.RaiseAndSetIfChanged(ref _selectedFriend, value);
-            RxApp.MainThreadScheduler.Schedule(LoadMessages);
+            RxApp.MainThreadScheduler.Schedule(async () =>
+            {
+                var user = Friends.FirstOrDefault(x => x.Email == SelectedFriend?.Email);
+                if (user is null) return;
+                Messages.Clear();
+                await _chat.GetMessages(user.UserId);
+            });
         }
     }
 
@@ -44,6 +51,14 @@ public class ChatViewModel : ReactiveObject, IRoutableViewModel
         get => _messageInput;
         set => this.RaiseAndSetIfChanged(ref _messageInput, value);
     }
+
+    private string _friendInput = string.Empty;
+    public string FriendInput
+    {
+        get => _friendInput;
+        set => this.RaiseAndSetIfChanged(ref _friendInput, value);
+    }
+
     public AvaloniaList<Message> Messages { get; set; } = new();
 
     public ChatViewModel(IScreen screen, AuthResponse authResponse)
@@ -52,25 +67,40 @@ public class ChatViewModel : ReactiveObject, IRoutableViewModel
         User = authResponse.User;
         _chat = new ChatHubClient(authResponse.Token);
 
-        _chat.ChatConnection.On<IEnumerable<User>>("GetFriends", Friends.AddRange);
-        _chat.ChatConnection.On<Message>("ReceiveMessage", Messages.Add);
+        _chat.ChatConnection.On<IEnumerable<User>>("GetFriends", users => {
+            Friends.Clear();
+            Friends.AddRange(users); 
+        });
+        _chat.ChatConnection.On<Message>("ReceiveMessage", msg =>
+        {
+            if (!Friends.Any(x => x.UserId == msg.Sender || x.UserId == msg.Receiver)) return;
+            Messages.Add(msg);
+        });
         _chat.ChatConnection.On<IEnumerable<Message>>("GetMessages", Messages.AddRange);
 
-        RxApp.MainThreadScheduler.Schedule(LoadFriends);
+        RxApp.MainThreadScheduler.Schedule(async () => await _chat.GetFriends());
     }
-
-    private async void LoadFriends() 
+    public async void OnSendMessage()
     {
-        await _chat.GetFriends();
-        if (Friends.Count > 0) SelectedFriend = Friends[0];
-    }
-    private async void LoadMessages() => await _chat.GetMessages(Friends.FirstOrDefault(x => x.Email == SelectedFriend?.Email)!.UserId);
-    public async void OnSendButtonClick()
-    {
-        if (SelectedFriend is null) return;
+        if (string.IsNullOrEmpty(MessageInput) || SelectedFriend is null) return;
 
         var msg = new Message(User.UserId, SelectedFriend.UserId, MessageInput);
         await _chat.SendMessage(msg);
         MessageInput = string.Empty;
+    }
+
+    public async void OnAddFriend()
+    {
+        if (string.IsNullOrEmpty(FriendInput)) return;
+
+        await _chat.AddFriend(FriendInput);
+        FriendInput = string.Empty;
+        await _chat.GetFriends();
+    }
+
+    public bool IsSender(Message message)
+    {
+        //throw new NotImplementedException();
+        return message.Sender == User.UserId;
     }
 }
